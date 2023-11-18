@@ -1,0 +1,11 @@
+@model SchoolProject.Models.Teacher
+@{
+    ViewBag.Title = "Show";
+}
+<h2>Show Teacher List</h2>
+<a class="navlink" href="/Teacher/List">Back To Teachers</a>
+<div id="containershow">
+    <h3>Teacher Name: @Model.TeacherFname @Model.TeacherLname</h3>
+    
+    <h4>Hire Date: @Model.HireDate ,Salary: @Model.Salary /hr</h4>
+</div>
