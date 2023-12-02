@@ -47,7 +47,7 @@ namespace SchoolProject.Controllers
             MySqlDataReader ResultSet = cmd.ExecuteReader();
 
             //Create an empty list of Teachers
-            List<Teacher> Teachers = new List<Teacher>{};
+            List<Teacher> Teachers = new List<Teacher> { };
 
             //Loop Through Each Row the Result Set
             while (ResultSet.Read())
@@ -114,7 +114,7 @@ namespace SchoolProject.Controllers
                 string HireDate = ResultSet["hiredate"].ToString();
                 string Salary = ResultSet["salary"].ToString();
 
-                
+
                 NewTeacher.TeacherId = TeacherId;
                 NewTeacher.TeacherFname = TeacherFname;
                 NewTeacher.TeacherLname = TeacherLname;
@@ -124,6 +124,63 @@ namespace SchoolProject.Controllers
 
 
             return NewTeacher;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <example> POST: api/TeacherData/DeleteTeacher/2</example>
+        [HttpPost]
+
+        public void DeleteTeacher(int id)
+        {
+
+            Teacher NewTeacher = new Teacher();
+
+            //Create an instance of a connection
+            MySqlConnection Conn = School.AccessDatabase();
+
+            //Open the connection between the web server and database
+            Conn.Open();
+
+            //Establish a new command (query) for our database
+            MySqlCommand cmd = Conn.CreateCommand();
+
+            //SQL QUERY
+            cmd.CommandText = "Delete from teachers where teacherid=@id";
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.Prepare();
+
+            cmd.ExecuteNonQuery();
+
+            Conn.Close();
+
+        }
+        [HttpPost]
+        public void AddTeacher(Teacher NewTeacher)
+        {
+       
+            //Create an instance of a connection
+            MySqlConnection Conn = School.AccessDatabase();
+
+            //Open the connection between the web server and database
+            Conn.Open();
+
+            //Establish a new command (query) for our database
+            MySqlCommand cmd = Conn.CreateCommand();
+
+            //SQL QUERY
+            cmd.CommandText = "Insert into teachers(teacherfname, teacherlname, hiredate, salary) values(@TeacherFname,@TeacherLname,@HireDate,@Salary)";
+            cmd.Parameters.AddWithValue("@TeacherFname", NewTeacher.TeacherFname);
+            cmd.Parameters.AddWithValue("@TeacherLname", NewTeacher.TeacherLname);
+            cmd.Parameters.AddWithValue("@HireDate", NewTeacher.HireDate);
+            cmd.Parameters.AddWithValue("@Salary", NewTeacher.Salary);
+            cmd.Prepare();
+
+            cmd.ExecuteNonQuery();
+
+            Conn.Close();
         }
     }
 }

@@ -1,0 +1,87 @@
+﻿
+@{
+    ViewBag.Title = "New";
+}
+
+<link rel="stylesheet" href="~/Content/Site.css" />
+<h2>New Teacher</h2>
+<form name="databaseform" method="POST" action="/Teacher/Create">
+    <div>
+        <label for="TeacherFName">First Name: </label>
+        <input type="text" id="TeacherFname" name="TeacherFname" />
+    </div>
+    <div>
+        <label for="TeacherLname">Last Name: </label>
+        <input type="text" id="TeacherLname" name="TeacherLname" />
+    </div>
+    <div>
+        <label for="HireDate">HireDate: </label>
+        <input type="date" id="HireDate" name="HireDate" />
+    </div>
+    <div>
+        <label for="Salary">Salary: </label>
+        <input type="text" id="Salary" name="Salary" />
+    </div>
+    <div>
+        <input type="submit" value="Create Teacher" />
+    </div>
+</form>
+
+<script>
+    window.onload = AddTeacher;
+    function AddTeacher() {
+
+        var formhandle = document.forms.databaseform;
+        formhandle.onsubmit = processForm;
+        function processForm() {
+
+            var firstname = formhandle.TeacherFname;
+            var lastname = formhandle.TeacherLname;
+            var hiredate = formhandle.HireDate;
+            var salary = formhandle.Salary;
+
+            if (TeacherFname.value === "") {
+                firstname.style.background = "red";
+                return false;
+            }
+            else if (TeacherLname.value === "") {
+                lastname.style.background = "red";
+                return false;
+            }
+            else if (HireDate.value === "") {
+                hiredate.style.background = "red";
+                return false;
+            }
+            else if (Salary.value === "") {
+                salary.style.background = "red";
+                return false;
+            }
+
+        }
+        return false;
+
+    }
+        
+    
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/Teacher/Create", true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    // Success, handle the response if needed
+                    console.log(xhr.responseText);
+                    window.location.href = "/Teacher/List";  // Redirect to the list page
+                } else {
+                    // Handle errors
+                    console.error("Error adding teacher: " + xhr.status);
+                }
+                xhr.send(JSON.stringify(TeacherData));
+            }
+        
+        };
+    
+    
+</script>
+

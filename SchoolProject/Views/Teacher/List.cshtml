@@ -2,8 +2,11 @@
 @{
     ViewBag.Title = "List";
 }
-
+<link rel="stylesheet" href="~/Content/Site.css" />
 <div id="containerlist">
+    <nav>
+        <a class="navlink" href="/Teacher/New">New Teacher</a>
+    </nav>
     <h2>List of Teachers</h2>
     <p>This page of showing information about all teachers.</p>
     <form action="/Teacher/List" method="GET">

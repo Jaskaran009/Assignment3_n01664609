@@ -2,10 +2,14 @@
 @{
     ViewBag.Title = "Show";
 }
+<link rel="stylesheet" href="~/Content/Site.css" />
 <h2>Show Teacher List</h2>
-<a class="navlink" href="/Teacher/List">Back To Teachers</a>
+
 <div id="containershow">
+    <a class="navlink" href="/Teacher/List">Back To Teachers</a>
+    <a class="dellink" href="/Teacher/DeleteConfirm/@Model.TeacherId">Delete</a>
     <h3>Teacher Name: @Model.TeacherFname @Model.TeacherLname</h3>
-    
-    <h4>Hire Date: @Model.HireDate ,Salary: @Model.Salary /hr</h4>
+
+    <h4>Hire Date: @Model.HireDate </h4>
+    <h4>Salary: @Model.Salary</h4>
 </div>

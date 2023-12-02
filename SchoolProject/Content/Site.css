@@ -11,3 +11,134 @@ select,
 textarea {
     max-width: 280px;
 }
+form {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f8f8f8;
+}
+
+div {
+    margin-bottom: 10px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="date"] {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+input[type="submit"] {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+    input[type="submit"]:hover {
+        background-color: #45a049;
+    }
+
+input:invalid {
+    background-color: red;
+}
+
+#containerlist {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+nav {
+    margin-bottom: 20px;
+}
+
+.navlink {
+    text-decoration: none;
+    padding: 10px;
+    background-color: #4caf50;
+    color: #fff;
+    border-radius: 5px;
+}
+
+h2 {
+    color: #333;
+}
+
+p {
+    color: #666;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+input[type="text"],
+input[type="submit"] {
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.listitem {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+a {
+    text-decoration: none;
+    color: #333;
+}
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+#containershow {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.navlink, .dellink {
+    text-decoration: none;
+    padding: 10px;
+    margin-bottom: 10px;
+    display: inline-block;
+    background-color: #4caf50;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.dellink {
+    background-color: #ff6666;
+    margin-left: 10px;
+}
+
+h2, h3, h4 {
+    color: #333;
+}
+
+h3 {
+    margin-top: 0;
+}
