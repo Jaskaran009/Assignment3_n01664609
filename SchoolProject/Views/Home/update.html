@@ -1,0 +1,70 @@
+﻿<!-- UpdateTeacher.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Teacher</title>
+</head>
+<body>
+
+    <h2>Update Teacher</h2>
+
+    <form id="updateTeacherForm">
+        <label for="teacherId">Teacher ID:</label>
+        <input type="text" id="teacherId" name="teacherId" required>
+        <br>
+        <label for="teacherFname">First Name:</label>
+        <input type="text" id="teacherFname" name="teacherFname" required>
+        <br>
+        <label for="teacherLname">Last Name:</label>
+        <input type="text" id="teacherLname" name="teacherLname" required>
+        <br>
+        <label for="hireDate">Hire Date:</label>
+        <input type="date" id="hireDate" name="hireDate" required>
+        <br>
+        <label for="salary">Salary:</label>
+        <input type="text" id="salary" name="salary" required>
+        <br>
+        <input type="button" value="Update Teacher" onclick="updateTeacher()">
+    </form>
+    <script>
+    function updateTeacher() {
+    // Get form data
+    var teacherId = document.getElementById("teacherId").value;
+    var teacherFname = document.getElementById("teacherFname").value;
+    var teacherLname = document.getElementById("teacherLname").value;
+    var hireDate = document.getElementById("hireDate").value;
+    var salary = document.getElementById("salary").value;
+
+    // Create a JSON object with the updated data
+    var data = {
+    TeacherFname: teacherFname,
+    TeacherLname: teacherLname,
+    HireDate: hireDate,
+    Salary: salary
+    };
+
+    // Send XHR request
+    var xhr = new XMLHttpRequest();
+    var url = "http://your-api-url/api/TeacherData/UpdateTeacher/" + teacherId;
+
+    xhr.open("PUT", url, true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+
+    xhr.onreadystatechange = function () {
+    if (xhr.readyState == 4 && xhr.status == 200) {
+    // Handle the response if needed
+    console.log("Teacher updated successfully");
+    }
+    };
+
+    // Convert the data object to JSON string before sending
+    var jsonData = JSON.stringify(data);
+
+    xhr.send(jsonData);
+    }
+    </script>
+</body>
+</html>

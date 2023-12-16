@@ -1,0 +1,106 @@
+﻿@model SchoolProject.Models.Teacher
+@{
+    ViewBag.Title = "Update";
+}
+
+<h2>Update Teacher</h2>
+<nav><a class="navlink" href="/Teacher/Show/@Model.TeacherId">Back</a></nav>
+<form name="databaseform" method="POST" action="/Teacher/Update/@Model.TeacherId">
+    <div>
+        <input type="hidden"  id="TeacherId" name="TeacherId" value="@Model.TeacherId" />
+
+    </div>
+    <div>
+        <label for="TeacherFName">First Name: </label>
+        <input type="text" id="TeacherFname" name="TeacherFname" value="@Model.TeacherFname"/>
+    </div>
+    <div>
+        <label for="TeacherLname">Last Name: </label>
+        <input type="text" id="TeacherLname" name="TeacherLname" value="@Model.TeacherLname" />
+    </div>
+    <div>
+        <label for="HireDate">HireDate: </label>
+        <input type="date" id="HireDate" name="HireDate" value="@Model.HireDate.ToString()" />
+    </div>
+    <div>
+        <label for="Salary">Salary: </label>
+        <input type="text" id="Salary" name="Salary" value="@Model.Salary" />
+    </div>
+    <div>
+        <input type="submit" value="Update Teacher" />
+    </div>
+</form>
+
+    <script>
+
+        window.onload = UpdateTeacher;
+        function UpdateTeacher() {
+
+        var formhandle = document.forms.databaseform;
+        formhandle.onsubmit = processForm;
+        function processForm() {
+
+            var firstname = formhandle.TeacherFname;
+        var lastname = formhandle.TeacherLname;
+        var hiredate = formhandle.HireDate;
+        var salary = formhandle.Salary;
+
+        if (TeacherFname.value === "") {
+            firstname.style.background = "red";
+        return false;
+            }
+        else if (TeacherLname.value === "") {
+            lastname.style.background = "red";
+        return false;
+            }
+        else if (HireDate.value === "") {
+            hiredate.style.background = "red";
+        return false;
+            }
+        else if (Salary.value === "") {
+            salary.style.background = "red";
+        return false;
+            }
+
+        }
+        return false;
+
+    }
+
+    function updateTeacher() {
+    // Get form data
+    //var teacherId = document.getElementById("TeacherId").value;
+    //var teacherFname = document.getElementById("TeacherFname").value;
+    //var teacherLname = document.getElementById("TeacherLname").value;
+    //var hireDate = document.getElementById("HireDate").value;
+    var salary = document.getElementById("Salary").value;
+
+    // Create a JSON object with the updated data
+    var data = {
+        TeacherFname: teacherFname,
+        TeacherLname: teacherLname,
+        HireDate: hireDate,
+        Salary: salary
+    };
+
+    // Send XHR request
+    var xhr = new XMLHttpRequest();
+        var url = "https://localhost:44381/TeacherData/UpdateTeacher/" + teacherId;
+    
+    xhr.open("PUT", url, true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            // Handle the response if needed
+            console.log("Teacher updated successfully");
+        }
+    };
+
+    // Convert the data object to JSON string before sending
+    var jsonData = JSON.stringify(data);
+
+    xhr.send(jsonData);
+}
+</script>
+

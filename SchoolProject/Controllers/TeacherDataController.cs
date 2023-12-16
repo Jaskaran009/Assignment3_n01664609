@@ -7,6 +7,7 @@ using System.Web.Http;
 using SchoolProject.Models;
 using MySql.Data.MySqlClient;
 using System.Data.SqlClient;
+using System.Web.Http.Controllers;
 
 namespace SchoolProject.Controllers
 {
@@ -79,7 +80,7 @@ namespace SchoolProject.Controllers
 
 
         /// <summary>
-        /// Returns an individual author from the database by specifying the primary key authorid
+        /// Returns an individual author from the database by specifying the primary key id
         /// </summary>
         /// <param name="id">the teacher's id in the database</param>
         /// <returns>A teacher object</returns>
@@ -127,7 +128,7 @@ namespace SchoolProject.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Deletes an individual teacher from the database by specifying the primary key 
         /// </summary>
         /// <param name="id"></param>
         /// <example> POST: api/TeacherData/DeleteTeacher/2</example>
@@ -157,6 +158,12 @@ namespace SchoolProject.Controllers
             Conn.Close();
 
         }
+
+        /// <summary>
+        /// Add a new teacher data in the database by specifying all the necessary details
+        /// </summary>
+        /// <param name="id"></param>
+        /// <example> POST: api/TeacherData/AddTeacher</example>
         [HttpPost]
         public void AddTeacher(Teacher NewTeacher)
         {
@@ -176,6 +183,38 @@ namespace SchoolProject.Controllers
             cmd.Parameters.AddWithValue("@TeacherLname", NewTeacher.TeacherLname);
             cmd.Parameters.AddWithValue("@HireDate", NewTeacher.HireDate);
             cmd.Parameters.AddWithValue("@Salary", NewTeacher.Salary);
+            cmd.Prepare();
+
+            cmd.ExecuteNonQuery();
+
+            Conn.Close();
+        }
+
+        /// <summary>
+        /// Updates an individual in the database by specifying the primary key 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <example> POST: api/TeacherData/UpdateTeacher/2</example>
+
+
+        public void UpdateTeacher(int id, [FromBody]Teacher TeacherInfo)
+        {
+            //Create an instance of a connection
+            MySqlConnection Conn = School.AccessDatabase();
+
+            //Open the connection between the web server and database
+            Conn.Open();
+
+            //Establish a new command (query) for our database
+            MySqlCommand cmd = Conn.CreateCommand();
+
+            //SQL QUERY
+            cmd.CommandText = "update teachers set teacherfname=@TeacherFname, teacherlname= @TeacherLname, hiredate=@HireDate, salary= @Salary where teacherid= @TeacherId";
+            cmd.Parameters.AddWithValue("@TeacherFname", TeacherInfo.TeacherFname);
+            cmd.Parameters.AddWithValue("@TeacherLname", TeacherInfo.TeacherLname);
+            cmd.Parameters.AddWithValue("@HireDate", TeacherInfo.HireDate);
+            cmd.Parameters.AddWithValue("@Salary", TeacherInfo.Salary);
+            cmd.Parameters.AddWithValue("@TeacherId", id);
             cmd.Prepare();
 
             cmd.ExecuteNonQuery();
